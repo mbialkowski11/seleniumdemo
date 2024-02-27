@@ -26,7 +26,21 @@ public class MyAccountPage {
     private WebElement loginButton;
 
     @FindBy(xpath = "//ul[@class='woocommerce-error']//li")
-    private WebElement error;
+    private WebElement errorWithRegister;
+
+    // Po kursie, dodatkowe
+
+    @FindBy(xpath = "//a[text()='Lost your password?']")
+    private WebElement lostPasswordLink;
+
+    @FindBy(id = "user_login")
+    private WebElement lostPasswordUsernameInput;
+
+    @FindBy(xpath = "//button[@class='woocommerce-Button button']")
+    private WebElement lostPasswordButton;
+
+    @FindBy(xpath = "//div[@class='woocommerce-message']")
+    private WebElement sendResetPasswordEmail;
 
     private WebDriver driver;
 
@@ -41,6 +55,7 @@ public class MyAccountPage {
         return new LoggedUserPage(driver);
     }
 
+
     public MyAccountPage registerUserInvalidData(String email, String password) {
         registerUser(email, password);
         return this;
@@ -52,8 +67,8 @@ public class MyAccountPage {
         registerButton.click();
     }
 
-    public LoggedUserPage logInValidData(String username, String password) {
-        logIn(username, password);
+    public LoggedUserPage logInValidData(String email, String password) {
+        logIn(email, password);
         return new LoggedUserPage(driver);
     }
 
@@ -68,7 +83,29 @@ public class MyAccountPage {
         loginButton.click();
     }
 
-    public WebElement getError() {
-        return error;
+    public WebElement getErrorWithRegister() {
+        return errorWithRegister;
     }
+
+    // Dodane po kursie
+
+    public MyAccountPage resetPassword() {
+        lostPasswordLink.click();
+        return this;
+    }
+
+    public MyAccountPage lostPasswordInputUsername(String message) {
+        lostPasswordUsernameInput.sendKeys(message);
+        return this;
+    }
+
+    public MyAccountPage resetPasswordButton() {
+        lostPasswordButton.click();
+        return this;
+    }
+
+    public WebElement getGoodMessageSendLostPassword() {
+        return sendResetPasswordEmail;
+    }
+
 }

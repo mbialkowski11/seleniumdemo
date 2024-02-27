@@ -12,6 +12,12 @@ public class LoggedUserPage {
     private WebElement dashboardLink;
 
 
+    //Dodane po kursie
+
+    @FindBy(xpath = "//a[text()='Logout']")
+    private WebElement logoutButton;
+
+
     private WebDriver driver;
 
     public LoggedUserPage(WebDriver driver) {
@@ -21,6 +27,11 @@ public class LoggedUserPage {
 
     public WebElement getDashboardLink() {
         return dashboardLink;
+    }
+
+    public MyAccountPage logout() {
+        logoutButton.click();
+        return new MyAccountPage(driver);
     }
 
 

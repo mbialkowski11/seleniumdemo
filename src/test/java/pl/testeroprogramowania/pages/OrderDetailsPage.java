@@ -22,10 +22,12 @@ public class OrderDetailsPage {
     }
 
     public WebElement getOrderNotice() {
+
         return orderNotice;
     }
 
     public WebElement getProductName() {
+
         return productName;
     }
 }
